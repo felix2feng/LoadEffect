@@ -25,20 +25,10 @@ app.post('/api/master', masterController.webServer);
 // Handle POST request for jobs from the worker
 app.post('/api/requestJob', masterController.requestJob);
 
-// Handle heartbeat POST request from the worker
-// app.post('/api/heartbeat', masterController.heartbeat);
-
 // Handle completion POST request from the worker
 app.post('/api/complete', masterController.complete);
 
 // Server listens at specified port
 app.listen(app.get('port'), () => {
   console.log(`Master server listening to port ${app.get('port')}`);
-  // [FOR DEMO PURPOSES] Read job from file and call webServer dummy handler with jobs
-  // fs.readFile(process.cwd() + '/testData/jobCount.txt', 'utf8', (err, data) => {
-  //   if (err) {
-  //     return console.log(err);
-  //   }
-  //   return masterController.tempHandler(data);
-  // });
 });

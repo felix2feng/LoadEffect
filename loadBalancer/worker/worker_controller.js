@@ -1,6 +1,7 @@
 // Dependencies
 const request = require('request');
 const scenariorunner = require('./scripts/scenario');
+const Action = require('../../server/models/ActionsModel');
 
 // const primeCreator = require('../testData/primeTester.js');
 
@@ -27,8 +28,24 @@ const handleJob = jobs => {
       ]
     }
     */
-
-
+      // TODO: For each job, save actions to the database
+      const actionsResults = runresults.transactionTimes;
+      for (let i = 0; i < actionsResults.length; i++) {
+        // SAVE ITEM TO DATABASE
+        const data = {
+          statusCode: actionsResults[i].statusCode,
+          responseTime: actionsResults[i].elapsedTime,
+          // TODO ADD MORE
+        };
+        const newAction = new Action(data);
+        newAction.save()
+          .then(() => {
+            console.log('Successfully saved');
+          })
+          .catch(err => {
+            console.error(err);
+          });
+      }
       jobResult[job] = runresults;
       results.push(jobResult);
       jobsCompleted++;

@@ -39,6 +39,7 @@ const webServer = (req, res) => {
     targetUrl: req.body.targetUrl,
     script: req.body.script,
   };
+  // TODO: Get scenario ID and pass onto task
 
   // Split up jobs into chunks and place into job queue
   const spawnCount = +req.body.spawnCount;
@@ -84,21 +85,6 @@ const complete = (req, res) => {
   res.status(200).send();
 };
 
-// [FOR DEMO PURPOSES]
-const tempHandler = (jobs) => {
-  // totalJobs = jobs;
-  // const denominator = 10;
-  // const jobCount = divide(jobs, denominator);
-  // for (let toAdd = 0; toAdd < jobCount; toAdd++) {
-  //   jobQueue.addToQueue(denominator);
-  // }
-  // console.log('queue is', jobQueue.items);
-  // console.log('total jobs', totalJobs);
-
-//   // TODO: Capacity Check - check to see how many workers required
-//   // TODO: Create ability to create workers
-};
-
 const requestJob = (req, res) => {
   console.log('Got a post request on master server! Queue is', jobQueue.items);
   // Check if jobs are available
@@ -112,4 +98,4 @@ const requestJob = (req, res) => {
 };
 
 
-module.exports = { webServer, complete, tempHandler, requestJob };
+module.exports = { webServer, complete, requestJob };
