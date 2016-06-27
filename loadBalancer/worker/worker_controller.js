@@ -1,7 +1,7 @@
 // Dependencies
 const request = require('request');
 const scenariorunner = require('./scripts/scenario');
-const Action = require('../../server/models/ActionsModel');
+const Action = require('../../webserver/models/ActionsModel');
 
 // const primeCreator = require('../testData/primeTester.js');
 
@@ -16,7 +16,8 @@ const handleJob = jobs => {
   console.log('Got some work from the server', jobs);
   const results = [];
   jobs.forEach(job => {
-    const jobResult = {};
+    // TO DELETE
+    // const jobResult = {};
 
     scenariorunner.run(job.targetUrl, job.script)
     .then((runresults) => {
@@ -31,13 +32,13 @@ const handleJob = jobs => {
       // TODO: For each job, save actions to the database
       const actionsResults = runresults.transactionTimes;
       for (let i = 0; i < actionsResults.length; i++) {
-        // SAVE ITEM TO DATABASE
-        const data = {
+        // SAVE ITEM TO ACTIONS DATABASE
+        const actionData = {
           statusCode: actionsResults[i].statusCode,
-          responseTime: actionsResults[i].elapsedTime,
-          // TODO ADD MORE
+          elapsedTime: actionsResults[i].elapsedTime,
+          // id_scenario: 
         };
-        const newAction = new Action(data);
+        const newAction = new Action(actionData);
         newAction.save()
           .then(() => {
             console.log('Successfully saved');
@@ -46,8 +47,12 @@ const handleJob = jobs => {
             console.error(err);
           });
       }
-      jobResult[job] = runresults;
-      results.push(jobResult);
+
+      // TODO: Save to spawn database
+
+      // TO DELETE
+      // jobResult[job] = runresults;
+      results.push(runresults);
       jobsCompleted++;
     });
   });

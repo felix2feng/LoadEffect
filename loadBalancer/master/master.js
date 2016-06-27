@@ -20,7 +20,7 @@ app.set('port', port);
 app.use(bodyParser.json());
 
 // Handle POST request from the web server
-app.post('/api/master', masterController.webServer);
+app.post('/api/master', masterController.handleJobFromWebServer);
 
 // Handle POST request for jobs from the worker
 app.post('/api/requestJob', masterController.requestJob);
