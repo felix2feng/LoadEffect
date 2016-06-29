@@ -21,7 +21,17 @@ const NavigationContainer = (props) => {
   const LoggedIn = (
     <Nav pullRight>
       <li>
+<<<<<<< 2c9a1a9b0f761626944c8dea639bc58f5c667678
         <Link to="/" onClick={showNewScenario}>Create New Scenario</Link>
+=======
+        <Link to="/live-results">[TEST - Live Results]</Link>
+      </li>
+      <li>
+        <Link to="/results-detail">[TEST - Results Detail]</Link>
+      </li>
+      <li>
+        <Link to="/new-scenario">Create New Scenario</Link>
+>>>>>>> Configuring for results detail and live results containers
       </li>
       <li>
         <Link to="/main">Main</Link>

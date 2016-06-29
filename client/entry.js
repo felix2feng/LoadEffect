@@ -8,12 +8,18 @@ import AppContainer from './components/AppContainer.jsx';
 import HomeContainer from './components/Home/HomeContainer.jsx';
 import MainContainer from './components/Main/MainContainer.jsx';
 
+import LiveResultsContainer from './components/LiveResults/LiveResultsContainer.jsx';
+import ResultDetailsContainer from './components/ResultDetails/ResultDetailsContainer.jsx';
+
+
 const router = (
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={AppContainer}>
         <IndexRoute component={HomeContainer} />
         <Route path="/main" component={MainContainer} />
+        <Route path="/live-results" component={LiveResultsContainer} />
+        <Route path="/results-detail" component={ResultDetailsContainer} />
       </Route>
     </Router>
   </Provider>
